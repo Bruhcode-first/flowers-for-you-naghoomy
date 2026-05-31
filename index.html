@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I'm sorry cutie 💕</title>
+    <title>For you cute Enjy 💕</title>
     <style>
 *,
 *::after,
@@ -38,7 +38,7 @@ body {
   width: 100%;
   height: 100%;
   filter: blur(0.1vmin);
-  background-image: radial-gradient(ellipse at top, transparent 0%, var(--dark-color)), radial-gradient(ellipse at bottom, var(--dark-color), rgba(145, 233, 255, 0.2)), repeating-linear-gradient(220deg, black 0px, black 19px, transparent 19px, transparent 22px), repeating-linear-gradient(189deg, black 0px, black 19px, transparent 19px, transparent 22px), repeating-linear-gradient(148deg, black 0px, black 19px, transparent 19px, transparent 22px), linear-gradient(90deg, #00fffa, #f0f0f0);
+  background-image: radial-gradient(ellipse at top, transparent 0%, var(--dark-color)), radial-gradient(ellipse at bottom, var(--dark-color), rgba(255, 143, 177, 0.25)), repeating-linear-gradient(220deg, black 0px, black 19px, transparent 19px, transparent 22px), repeating-linear-gradient(189deg, black 0px, black 19px, transparent 19px, transparent 22px), repeating-linear-gradient(148deg, black 0px, black 19px, transparent 19px, transparent 22px), linear-gradient(90deg, #ff8fb1, #ffd9e8);
 }
 .flowers {
   position: relative;
@@ -138,7 +138,7 @@ body {
   transform: translate(-50%, -100%);
   width: 8vmin;
   height: 8vmin;
-  background-color: #6bf0ff;
+  background-color: #ff8fb1;
   filter: blur(10vmin);
 }
 .flower__leaf {
@@ -148,11 +148,11 @@ body {
   width: 8vmin;
   height: 11vmin;
   border-radius: 51% 49% 47% 53%/44% 45% 55% 69%;
-  background-color: purple;
-  background-image: linear-gradient(to top, red, purple);
+  background-color: #d6336c;
+  background-image: linear-gradient(to top, #ff9ebd, #d6336c);
   transform-origin: bottom center;
-  opacity: 0.9;
-  box-shadow: inset 0 0 2vmin rgba(255, 255, 255, 0.5);
+  opacity: 0.92;
+  box-shadow: inset 0 0 2vmin rgba(255, 255, 255, 0.55);
 }
 .flower__leaf--1 {
   transform: translate(-10%, 1%) rotateY(40deg) rotateX(-50deg);
@@ -169,7 +169,7 @@ body {
   transform-origin: bottom left;
   border-radius: 4vmin 10vmin 4vmin 4vmin;
   transform: translate(0%, 18%) rotateX(70deg) rotate(-43deg);
-  background-image: linear-gradient(to top, red, purple);
+  background-image: linear-gradient(to top, #ff9ebd, #d6336c);
   z-index: 1;
   opacity: 0.8;
 }
@@ -247,13 +247,14 @@ body {
   bottom: 0vmin;
   width: 1vmin;
   height: 1vmin;
-  background-color: #fffb00;
+  background-color: #ffd9e8;
   border-radius: 50%;
   filter: blur(0.2vmin);
+  box-shadow: 0 0 1vmin #ff8fb1;
   animation: light-ans 4s linear infinite backwards;
 }
 .flower__light:nth-child(odd) {
-  background-color: #23f0ff;
+  background-color: #ff6b9d;
 }
 .flower__light--1 {
   left: -2vmin;
@@ -987,6 +988,205 @@ body {
 }
 .not-loaded * {
   animation-play-state: paused !important;
+}
+
+/* ---------- floating hearts ---------- */
+.hearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+.heart {
+  position: absolute;
+  bottom: -8vmin;
+  font-size: 2.4vmin;
+  color: #ff6b9d;
+  opacity: 0;
+  filter: drop-shadow(0 0 0.6vmin rgba(255, 107, 157, 0.6));
+  animation: float-heart linear infinite;
+}
+@keyframes float-heart {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.7);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(-55vh) translateX(4vmin) rotate(20deg) scale(1);
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(-3vmin) rotate(-15deg) scale(0.9);
+    opacity: 0;
+  }
+}
+
+/* ---------- envelope / mailbox ---------- */
+.mail {
+  position: fixed;
+  bottom: 6vmin;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4vmin;
+  cursor: pointer;
+  animation: mail-float 3.2s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+}
+@keyframes mail-float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-1.4vmin); }
+}
+.envelope {
+  position: relative;
+  width: 22vmin;
+  height: 14vmin;
+  border-radius: 1.4vmin;
+  background: linear-gradient(160deg, #fff0f5, #ffd9e8);
+  box-shadow: 0 1.4vmin 4vmin rgba(255, 107, 157, 0.45),
+              inset 0 0 1.2vmin rgba(255, 255, 255, 0.7);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.mail:hover .envelope {
+  transform: scale(1.06) rotate(-1deg);
+  box-shadow: 0 2vmin 5vmin rgba(255, 107, 157, 0.6);
+}
+/* the body lines (paper pocket) */
+.envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 1.4vmin;
+  background:
+    linear-gradient(45deg, rgba(214, 51, 108, 0.12) 0%, transparent 50%),
+    linear-gradient(-45deg, rgba(214, 51, 108, 0.12) 0%, transparent 50%);
+}
+/* the flap */
+.envelope__flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 11vmin solid transparent;
+  border-right: 11vmin solid transparent;
+  border-top: 8vmin solid #ffc2d6;
+  border-radius: 1.4vmin;
+  transform-origin: top;
+  z-index: 3;
+}
+.envelope__heart {
+  position: absolute;
+  top: 5.4vmin;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  font-size: 4vmin;
+  color: #e63972;
+  filter: drop-shadow(0 0.3vmin 0.4vmin rgba(0,0,0,0.25));
+  animation: seal-beat 1.6s ease-in-out infinite;
+}
+@keyframes seal-beat {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.15); }
+}
+.mail__hint {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 1.9vmin;
+  letter-spacing: 0.3vmin;
+  color: #ffd9e8;
+  text-shadow: 0 0 1vmin rgba(255, 107, 157, 0.8);
+  animation: hint-pulse 2s ease-in-out infinite;
+}
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+/* ---------- letter overlay ---------- */
+.letter-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vmin;
+  background: radial-gradient(ellipse at center, rgba(40, 0, 20, 0.55), rgba(0, 0, 0, 0.85));
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.letter-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.letter {
+  position: relative;
+  max-width: 52vmin;
+  width: 100%;
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 6vmin 5vmin;
+  border-radius: 2vmin;
+  background:
+    repeating-linear-gradient(transparent, transparent 3.6vmin, rgba(214, 51, 108, 0.08) 3.6vmin, rgba(214, 51, 108, 0.08) 3.7vmin),
+    linear-gradient(160deg, #fffaf6, #fff0f5);
+  box-shadow: 0 3vmin 8vmin rgba(0, 0, 0, 0.6);
+  color: #6d2742;
+  font-family: "Segoe Script", "Bradley Hand", "Comic Sans MS", cursive;
+  transform: translateY(4vmin) scale(0.92);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.letter-overlay.open .letter {
+  transform: translateY(0) scale(1);
+}
+.letter__title {
+  font-size: 3.4vmin;
+  text-align: center;
+  margin-bottom: 3vmin;
+  color: #e63972;
+}
+.letter__body {
+  font-size: 2.4vmin;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+.letter__sign {
+  margin-top: 3vmin;
+  text-align: right;
+  font-size: 2.6vmin;
+  color: #e63972;
+}
+.letter__close {
+  position: absolute;
+  top: 1.6vmin;
+  right: 2vmin;
+  width: 4vmin;
+  height: 4vmin;
+  border: none;
+  border-radius: 50%;
+  background: #ffd9e8;
+  color: #e63972;
+  font-size: 2.4vmin;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.letter__close:hover {
+  transform: rotate(90deg) scale(1.1);
+  background: #ffc2d6;
 }</style>
     <script src="script.js"></script>
 </head>
@@ -1286,6 +1486,41 @@ body {
         <div class="grow-ans" style="--d:3.6s">
           <div class="leaf leaf--3"></div>
         </div>
+      </div>
+    </div>
+
+    <!-- floating hearts (filled in by script.js) -->
+    <div class="hearts" id="hearts"></div>
+
+    <!-- cute clickable envelope -->
+    <div class="mail" id="mail" role="button" tabindex="0" aria-label="Open the letter">
+      <div class="envelope">
+        <div class="envelope__flap"></div>
+        <div class="envelope__heart">&#10084;</div>
+      </div>
+      <div class="mail__hint">click me &#128140;</div>
+    </div>
+
+    <!-- the love letter that pops up -->
+    <div class="letter-overlay" id="letterOverlay">
+      <div class="letter">
+        <button class="letter__close" id="letterClose" aria-label="Close">&times;</button>
+        <div class="letter__title">For you cute Enjy &#128149;</div>
+        <!--
+          ==========================================================
+          WRITE YOUR LETTER HERE  -  just change the text below :)
+          ==========================================================
+        -->
+        <div class="letter__body">Hey Enjy,
+
+I felt like you were a little sad last night, so I made this for you. Maybe it can help your day start a bit brighter. &#127804;
+
+I know we havent known each others for that long but you kinda mean lot for me. You're such a wonderful person and an amazing friend, and you deserve all the good things in the world.
+
+These little flowers are blooming just for you, with all my good wishes. Whatever you're going through, please remember you're never alone in it.
+
+I'm always here for you, today and always. &#128150;</div>
+        <div class="letter__sign">always with you, Yousef &#128150;</div>
       </div>
     </div>
   </body></html>
