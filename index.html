@@ -1187,6 +1187,52 @@ body {
 .letter__close:hover {
   transform: rotate(90deg) scale(1.1);
   background: #ffc2d6;
+}
+
+/* ---------- hidden visit counter (private) ---------- */
+.visit-secret {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12vmin;
+  height: 12vmin;
+  z-index: 300;
+  cursor: default;
+  opacity: 0;
+}
+.visit-stats {
+  position: fixed;
+  top: 2vmin;
+  right: 2vmin;
+  z-index: 301;
+  padding: 1.6vmin 2.2vmin;
+  border-radius: 1vmin;
+  background: rgba(0, 0, 0, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 217, 232, 0.92);
+  font-family: "Consolas", "Segoe UI", monospace;
+  font-size: 1.7vmin;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-1vmin);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.visit-stats.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.visit-stats__label {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 1.4vmin;
+  text-transform: uppercase;
+}
+.visit-stats__count {
+  font-size: 2.4vmin;
+  color: #ffd9e8;
+  margin-top: 0.4vmin;
 }</style>
     <script src="script.js"></script>
 </head>
@@ -1522,5 +1568,13 @@ These little flowers are blooming just for you, with all my good wishes. Whateve
 I'm always here for you, today and always. &#128150;</div>
         <div class="letter__sign">always with you, Yousef &#128150;</div>
       </div>
+    </div>
+
+    <!-- invisible tap zone: click top-left corner 5 times to see visit count -->
+    <div class="visit-secret" id="visitSecret" aria-hidden="true"></div>
+    <div class="visit-stats" id="visitStats" aria-hidden="true">
+      <div class="visit-stats__label">private stats</div>
+      <div class="visit-stats__count" id="visitCount">—</div>
+      <div class="visit-stats__label">visits</div>
     </div>
   </body></html>

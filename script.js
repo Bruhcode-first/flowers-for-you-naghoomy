@@ -46,4 +46,72 @@ onload = () => {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeLetter();
   });
+
+  // ---- private visit counter ----
+  const COUNTER_KEY = "forya-enjy-yousef-visits";
+  const counterHit = `https://countapi.mileshilliard.com/api/v1/hit/${COUNTER_KEY}`;
+  const counterGet = `https://countapi.mileshilliard.com/api/v1/get/${COUNTER_KEY}`;
+  const SESSION_KEY = "forya_visit_recorded";
+
+  const recordVisit = async () => {
+    if (sessionStorage.getItem(SESSION_KEY)) return;
+    try {
+      await fetch(counterHit);
+      sessionStorage.setItem(SESSION_KEY, "1");
+    } catch (_) {
+      /* offline or API down — skip silently */
+    }
+  };
+
+  const fetchVisitCount = async () => {
+    try {
+      const res = await fetch(counterGet);
+      const data = await res.json();
+      return typeof data.value === "number" ? data.value : null;
+    } catch (_) {
+      return null;
+    }
+  };
+
+  recordVisit();
+
+  const visitSecret = document.getElementById("visitSecret");
+  const visitStats = document.getElementById("visitStats");
+  const visitCountEl = document.getElementById("visitCount");
+  let secretTaps = 0;
+  let secretTimer = null;
+
+  const hideVisitStats = () => visitStats && visitStats.classList.remove("visible");
+
+  const showVisitStats = async () => {
+    if (!visitStats || !visitCountEl) return;
+    visitCountEl.textContent = "…";
+    visitStats.classList.add("visible");
+    visitStats.setAttribute("aria-hidden", "false");
+
+    const count = await fetchVisitCount();
+    visitCountEl.textContent = count !== null ? String(count) : "?";
+
+    clearTimeout(showVisitStats._hideTimer);
+    showVisitStats._hideTimer = setTimeout(hideVisitStats, 8000);
+  };
+
+  if (visitSecret) {
+    visitSecret.addEventListener("click", () => {
+      secretTaps += 1;
+      clearTimeout(secretTimer);
+      secretTimer = setTimeout(() => {
+        secretTaps = 0;
+      }, 2000);
+
+      if (secretTaps >= 5) {
+        secretTaps = 0;
+        showVisitStats();
+      }
+    });
+  }
+
+  if (visitStats) {
+    visitStats.addEventListener("click", hideVisitStats);
+  }
 };
